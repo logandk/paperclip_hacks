@@ -21,9 +21,9 @@ module Paperclip
   end
 
   class Attachment
-    def authenticated_url
+    def authenticated_url(style = default_style)
       if @storage.to_s == "s3" and file?
-        AWS::S3::S3Object.url_for(path, @bucket)
+        AWS::S3::S3Object.url_for(path(style), @bucket)
       else
         url
       end
